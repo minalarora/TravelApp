@@ -2,9 +2,10 @@ package com.srijan.travelapp.repository
 
 import com.parse.LogInCallback
 import com.parse.ParseException
+import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.srijan.travelapp.model.User
-import java.lang.Exception
+
 
 class UserRepository {
 
@@ -43,6 +44,23 @@ class UserRepository {
                 }
 
             })
+        }
+
+        @JvmStatic
+        fun getUserByEmail(email: String, onComplete: (User?, Exception?) -> Unit)
+        {
+            val query = ParseUser.getQuery()
+            query.whereEqualTo("email", email)
+            query.findInBackground { objects, e ->
+                if (e == null && objects.isNotEmpty()) {
+                    // The query was successful.
+                    onComplete(User(objects[0]),null)
+
+                } else {
+                    // Something went wrong.
+                    onComplete(null,e)
+                }
+            }
         }
 
         @JvmStatic

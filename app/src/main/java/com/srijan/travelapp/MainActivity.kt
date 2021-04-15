@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.parse.ParseUser
 import com.srijan.travelapp.databinding.ActivityMainBinding
 import com.srijan.travelapp.model.User
+import com.srijan.travelapp.repository.PostRepository
 import com.srijan.travelapp.repository.UserRepository
 import java.lang.Exception
 
@@ -47,5 +48,18 @@ class MainActivity : AppCompatActivity() {
 //            b: Boolean? ->
 //            Toast.makeText(this, "" + b, Toast.LENGTH_SHORT).show()
 //        }
+
+
+        PostRepository.createPost("hello Minal",null){ post, exception ->
+            if (exception == null)
+            {
+                Toast.makeText(this, "post", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 }
