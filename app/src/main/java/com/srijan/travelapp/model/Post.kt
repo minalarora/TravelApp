@@ -1,6 +1,7 @@
 package com.srijan.travelapp.model
 
 import com.parse.ParseClassName
+import com.parse.ParseGeoPoint
 import com.parse.ParseObject
 import com.parse.ParseUser
 
@@ -29,7 +30,7 @@ class Post : ParseObject(){
             }
         }
 
-    var media: MutableList<Media>?
+    var media: MutableList<String>?
         get() = getList("media")
         set(value) {
             if (value != null) {
@@ -43,44 +44,57 @@ class Post : ParseObject(){
             }
         }
 
-     var like: Int?
-         get() = getInt("like")
+     var likes: Int?
+         get() = getInt("likes")
          set(value) {
              if (value != null) {
-                 put("like",value)
+                 put("likes",value)
              }
              else
              {
-                 put("like",0)
+                 put("likes",0)
              }
          }
 
-    var comment: MutableList<Comment>?
-        get() = getList("comment")
+
+
+    var views: Int?
+        get() = getInt("views")
         set(value) {
             if (value != null) {
-                put("comment",value)
+                put("views",value)
             }
             else
             {
-                put("comment", MutableList(0) {
+                put("views",0)
+            }
+        }
+
+    var location: ParseGeoPoint?
+        get() = getParseGeoPoint("location")
+        set(value) {
+            if (value != null) {
+                put("location",value)
+            }
+        }
+
+    var comments: MutableList<String>?
+        get() = getList("comments")
+        set(value) {
+            if (value != null) {
+                put("comments",value)
+            }
+            else
+            {
+                put("comments", MutableList(0) {
 
                 })
             }
         }
 
 
-    var view: Int?
-        get() = getInt("view")
-        set(value) {
-            if (value != null) {
-                put("view",value)
-            }
-            else
-            {
-                put("view",0)
-            }
-        }
+
+
 
 
 }

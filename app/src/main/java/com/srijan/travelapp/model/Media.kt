@@ -25,5 +25,7 @@ class Media: ParseObject() {
                 put("type","OTHER")
             }
         }
+
+
     //IMAGE OR VIDEO
 }

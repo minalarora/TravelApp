@@ -4,29 +4,29 @@ import com.parse.ParseClassName
 import com.parse.ParseObject
 import com.parse.ParseUser
 
-@ParseClassName("Comment")
-class Comment: ParseObject() {
+@ParseClassName("Timeline")
+class Timeline: ParseObject() {
     var user: ParseUser?
         get() = getParseUser("user")
         set(value) {
             if (value != null) {
                 put("user",value)
             }
-            else
-            {
-                put("user",ParseUser.getCurrentUser())
+        }
+
+    var data: ParseObject?
+        get() = getParseObject("data")
+        set(value) {
+            if (value != null) {
+                put("data",value)
             }
         }
 
-    var text: String
-        get() = getString("text").toString()
+    var type: String?
+        get() = getString("type")
         set(value) {
             if (value != null) {
-                put("text",value)
-            }
-            else
-            {
-                put("text","")
+                put("type",value)
             }
         }
 }
