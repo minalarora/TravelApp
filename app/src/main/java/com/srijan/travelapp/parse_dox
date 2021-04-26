@@ -1,0 +1,210 @@
+------------------------------------------------------------------------------------------------
+//retrieving objects via ID
+ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+query.getInBackground("xWMyZ4YEGZ", new GetCallback<ParseObject>() {
+  public void done(ParseObject object, ParseException e) {
+    if (e == null) {
+      // object will be your game score
+    } else {
+      // something went wrong
+    }
+  }
+});
+-------------------------------------------------------------------------------------------
+//updating object
+ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+query.getInBackground("xWMyZ4YEGZ", new GetCallback<ParseObject>() {
+  public void done(ParseObject gameScore, ParseException e) {
+    if (e == null) {
+      // Now let's update it with some new data. In this case, only cheatMode and score
+      // will get sent to your Parse Server. playerName hasn't changed.
+      gameScore.put("score", 1338);
+      gameScore.put("cheatMode", true);
+      gameScore.saveInBackground();
+    }
+  }
+});
+--------------------------------------------------------------------------------------------
+
+//increment integer values
+gameScore.increment("score");
+gameScore.saveInBackground();
+
+-------------------------------------------------------------------------------------------------
+//add all unique values to an existing array
+gameScore.addAllUnique("skills", Arrays.asList("flying", "kungfu"));
+gameScore.saveInBackground();
+-----------------------------------------------------------------------------------------------------
+
+//deleting object
+myObject.deleteInBackground();
+-----------------------------------------------------------------------------------------------------
+//getting list of objects of matching condition
+ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+query.whereEqualTo("playerName", "Dan Stemkoski");
+query.findInBackground(new FindCallback<ParseObject>() {
+    public void done(List<ParseObject> scoreList, ParseException e) {
+        if (e == null) {
+            Log.d("score", "Retrieved " + scoreList.size() + " scores");
+        } else {
+            Log.d("score", "Error: " + e.getMessage());
+        }
+    }
+});
+
+------------------------------------------------------------------------------------------
+
+//getting list of objects of not matching condition
+query.whereNotEqualTo("playerName", "Michael Yabuti");
+
+------------------------------------------------------------------------------------------------
+
+//If you want exactly one result, use getFirstInBackground instead of using find.
+ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+query.whereEqualTo("playerEmail", "dstemkoski@example.com");
+query.getFirstInBackground(new GetCallback<ParseObject>() {
+  public void done(ParseObject object, ParseException e) {
+    if (object == null) {
+      Log.d("score", "The getFirst request failed.");
+    } else {
+      Log.d("score", "Retrieved the object.");
+    }
+  }
+});
+
+--------------------------------------------------------------------------------------------------------
+
+// Sorts the results in ascending order by the score field
+query.orderByAscending("score");
+
+// Sorts the results in descending order by the score field
+query.orderByDescending("score");
+
+-----------------------------------------------------------------------------------------------------------
+
+//for limit
+setLimit(10)
+
+//for skip
+setSkip(10)
+
+----------------------------------------------------------------------------------------
+
+//for getting followers list we can do this
+String[] followers_objectid = {"dsfsd23", "dsfds23", "dsfsd23"};
+query.whereContainedIn("followers", Arrays.asList(followers_objectid));
+
+//opposite
+String[] names = {"Jonathan Walsh", "Dario Wunsch", "Shawn Simon"};
+query.whereNotContainedIn("playerName", Arrays.asList(names));
+
+------------------------------------------------------------------------------------------
+
+GETCALLBACK FOR GETTING ONE OBJECT OR FINDCALLBACK FOR GETTING LIST
+
+----------------------------------------------------------------------------------------------
+
+//hometown is of user and city is of team
+ParseQuery<ParseObject> teamQuery = ParseQuery.getQuery("Team");
+teamQuery.whereGreaterThan("winPct", 0.5);
+ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+userQuery.whereMatchesKeyInQuery("hometown", "city", teamQuery);
+userQuery.findInBackground(new FindCallback<ParseUser>() {
+  void done(List<ParseUser> results, ParseException e) {
+    // results has the list of users with a hometown team with a winning record
+  }
+});
+
+//opposite
+ParseQuery<ParseUser> losingUserQuery = ParseUser.getQuery();
+losingUserQuery.whereDoesNotMatchKeyInQuery("hometown", "city", teamQuery);
+losingUserQuery.findInBackground(new FindCallback<ParseUser>() {
+  void done(List<ParseUser> results, ParseException e) {
+    // results has the list of users with a hometown team with a losing record
+  }
+});
+
+---------------------------------------------------------------------------------------
+//To filter rows based on objectId’s from pointers in a second table, you can use dot notation:
+ParseQuery<ParseObject> chartersOfTypeX = ParseQuery.getQuery("Charter");
+charterOfTypeX.equalTo('type', 'x');
+
+ParseQuery<ParseObject> groupsWithoutCharterX = ParseQuery.getQuery("Group");
+groupsWithoutCharterX.doesNotMatchKeyInQuery("objectId", "belongsTo.objectId", chartersOfTypeX);
+groupsWithoutCharterX.findInBackground(new FindCallback<ParseObject>() {
+  void done(List<ParseObject> results, ParseException e) {
+   // results has the list of groups without charter x
+ });
+
+-----------------------------------------------------------------------------------------
+
+//if an array contain a value 3
+query.whereEqualTo("arrayKey", 3);
+
+
+//if an array contain group of values
+// Find objects where the array in arrayKey contains all of the numbers 2, 3, and 4.
+ArrayList<Integer> numbers = new ArrayList<Integer>();
+numbers.add(2);
+numbers.add(3);
+numbers.add(4);
+query.whereContainsAll("arrayKey", numbers);
+------------------------------------------------------------------------------------
+
+//for searching user with name
+// Finds barbecue sauces that start with 'Big Daddy's'.
+ParseQuery<ParseObject> query = ParseQuery.getQuery("BarbecueSauce");
+query.whereStartsWith("name", "Big Daddy's");
+
+------------------------------------------------------------------
+//search by sending parse obj
+// Assume ParseObject myPost was previously created.
+ParseQuery<ParseObject> query = ParseQuery.getQuery("Comment");
+query.whereEqualTo("post", myPost);
+
+query.findInBackground(new FindCallback<ParseObject>() {
+  public void done(List<ParseObject> commentList, ParseException e) {
+    // commentList now has the comments for myPost
+  }
+});
+
+----------------------------------------------------------------------------
+
+// Retrieve the most recent ones
+query.orderByDescending("createdAt");
+
+
+-------------------------------------------------------------------------------------------
+
+//create a relation
+// let’s say we have a few objects representing Author objects
+ParseObject authorOne =
+ParseObject authorTwo =
+ParseObject authorThree =
+
+// now we create a book object
+ParseObject book = new ParseObject("Book");
+
+// now let’s associate the authors with the book
+// remember, we created a "authors" relation on Book
+ParseRelation<ParseObject> relation = book.getRelation("authors");
+relation.add(authorOne);
+relation.add(authorTwo);
+relation.add(authorThree);
+
+// now save the book object
+book.saveInBackground();
+
+------------------------------------------------------------------------------------------
+
+//get all values put in the relation
+// suppose we have a book object
+ParseObject book = ...
+
+// create a relation based on the authors key
+ParseRelation relation = book.getRelation("authors");
+
+// generate a query based on that relation
+ParseQuery query = relation.getQuery();
+
+// now execute the query
