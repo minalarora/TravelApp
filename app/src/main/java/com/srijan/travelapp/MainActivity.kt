@@ -4,10 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.parse.ParseObject
 import com.parse.ParseUser
 import com.srijan.travelapp.databinding.ActivityMainBinding
+import com.srijan.travelapp.model.Demo
 import com.srijan.travelapp.model.Post
-import com.srijan.travelapp.model.User
 import com.srijan.travelapp.repository.MediaRepository
 import com.srijan.travelapp.repository.PostRepository
 import com.srijan.travelapp.repository.UserRepository
@@ -19,6 +20,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var d: Demo  = Demo_One()
+//        with(d)
+//        {
+//            d.text = "text"
+//            d.text_one = "text1"
+//            d.text_two = "SD"
+//        }
+//        d.saveInBackground()
+
+        var d = Demo()
+        with(d)
+        {
+            d.text = "DS"
+            d.text_one = "@1"
+        }
+
+        d.saveInBackground()
+
+        var d2 = Demo()
+        with(d2)
+        {
+            d2.text = "DS"
+            d2.text_two = "@1"
+        }
+
+        d2.saveInBackground()
 //        UserRepository.createUser("Minal Arora","minaalarora567@gmail.com","123456")
 //        {
 //            user: User?, exception: Exception? ->

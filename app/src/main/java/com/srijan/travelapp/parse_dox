@@ -208,3 +208,16 @@ ParseRelation relation = book.getRelation("authors");
 ParseQuery query = relation.getQuery();
 
 // now execute the query
+
+
+-------------------------------------------------------------------------------------------------
+
+//https://docs.mapbox.com/android/maps/examples/create-a-line-layer/
+
+//https://docs.mapbox.com/android/maps/examples/draw-a-geojson-line/
+
+//https://docs.mapbox.com/android/maps/examples/moving-icon-with-trailing-line/
+
+//https://docs.mapbox.com/android/maps/examples/snaking-directions-route/
+
+//https://docs.mapbox.com/android/maps/examples/style-lines-using-an-identity-property-function/

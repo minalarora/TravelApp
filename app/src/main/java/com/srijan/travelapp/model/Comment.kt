@@ -4,8 +4,8 @@ import com.parse.ParseClassName
 import com.parse.ParseObject
 import com.parse.ParseUser
 
-@ParseClassName("Comment_Event")
-class Comment_Event: ParseObject() {
+@ParseClassName("Comment")
+class Comment: ParseObject() {
     var user: ParseUser?
         get() = getParseUser("user")
         set(value) {
@@ -14,19 +14,19 @@ class Comment_Event: ParseObject() {
             }
             else
             {
-                put("user",ParseUser.getCurrentUser())
+                put("user", ParseUser.getCurrentUser())
             }
         }
 
-    var event: Event?
-        get() = getParseObject("event") as Event
+    var post: Post?
+        get() = getParseObject("post") as Post
         set(value) {
             if (value != null) {
-                put("event",value)
+                put("post",value)
             }
             else
             {
-                put("event",Event())
+                put("post",Post())
             }
         }
 

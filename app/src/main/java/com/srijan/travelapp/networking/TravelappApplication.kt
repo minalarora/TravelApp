@@ -32,13 +32,9 @@ class TravelappApplication: Application() {
         builder.networkInterceptors().add(httpLoggingInterceptor)
 
         ParseObject.registerSubclass(Post::class.java)
-        ParseObject.registerSubclass(Event::class.java)
-        ParseObject.registerSubclass(Trip::class.java)
-        ParseObject.registerSubclass(Comment_Post::class.java)
-        ParseObject.registerSubclass(Comment_Event::class.java)
-        ParseObject.registerSubclass(Comment_Trip::class.java)
+        ParseObject.registerSubclass(Comment::class.java)
         ParseObject.registerSubclass(Media::class.java)
-        ParseObject.registerSubclass(Timeline::class.java)
+       // ParseObject.registerSubclass(Demo_One::class.java)
         // set applicationId, and server server based on the values in the back4app settings.
         // any network interceptors must be added with the Configuration Builder given this syntax
         Parse.initialize(

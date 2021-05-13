@@ -1,9 +1,6 @@
 package com.srijan.travelapp.model
 
-import com.parse.ParseClassName
-import com.parse.ParseGeoPoint
-import com.parse.ParseObject
-import com.parse.ParseUser
+import com.parse.*
 
 @ParseClassName("Post")
 class Post : ParseObject(){
@@ -18,29 +15,27 @@ class Post : ParseObject(){
          }
 
 
-    var text: String?
-        get() = getString("text").toString()
+    var title: String?
+        get() = getString("title").toString()
         set(value) {
             if (value != null) {
-                put("text",value)
+                put("title",value)
             }
             else
             {
-                put("text","")
+                put("title","")
             }
         }
 
-    var media: MutableList<String>?
-        get() = getList("media")
+    var description: String?
+        get() = getString("description").toString()
         set(value) {
             if (value != null) {
-                put("media",value)
+                put("description",value)
             }
             else
             {
-                put("media", MutableList(0) {
-
-                })
+                put("description","")
             }
         }
 
@@ -70,31 +65,132 @@ class Post : ParseObject(){
             }
         }
 
-    var location: ParseGeoPoint?
-        get() = getParseGeoPoint("location")
+    var tag: String?
+        get() = getString("tag").toString()
         set(value) {
             if (value != null) {
-                put("location",value)
-            }
-        }
-
-    var comments: MutableList<String>?
-        get() = getList("comments")
-        set(value) {
-            if (value != null) {
-                put("comments",value)
+                put("tag",value)
             }
             else
             {
-                put("comments", MutableList(0) {
+                put("tag","")
+            }
+        }
+
+    var media: MutableList<String>?
+        get() = getList("media")
+        set(value) {
+            if (value != null) {
+                put("media",value)
+            }
+            else
+            {
+                put("media", MutableList(0) {
 
                 })
             }
         }
 
+    var locationName: String?
+        get() = getString("location_name").toString()
+        set(value) {
+            if (value != null) {
+                put("location_name",value)
+            }
+            else
+            {
+                put("location_name","")
+            }
+        }
 
+    var locationCoordinate: ParseGeoPoint?
+        get() = getParseGeoPoint("location_cn")
+        set(value) {
+            if (value != null) {
+                put("location_cn",value)
+            }
+        }
 
+    var time: String?
+        get() = getString("time").toString()
+        set(value) {
+            if (value != null) {
+                put("time",value)
+            }
+            else
+            {
+                put("time","")
+            }
+        }
 
+    var date: String?
+        get() = getString("date").toString()
+        set(value) {
+            if (value != null) {
+                put("date",value)
+            }
+            else
+            {
+                put("date","")
+            }
+        }
 
+    var price: Int?
+        get() = getInt("price")
+        set(value) {
+            if (value != null) {
+                put("price",value)
+            }
+            else
+            {
+                put("price",0)
+            }
+        }
+
+    var going: ParseRelation<ParseUser>?
+        get() = getRelation("going")
+        set(value) {
+            if (value != null) {
+                put("going",value)
+            }
+        }
+
+    var duration: Int?
+        get() = getInt("duration")
+        set(value) {
+            if (value != null) {
+                put("duration",value)
+            }
+            else
+            {
+                put("duration",0)
+            }
+        }
+
+    var coordinateArray: MutableList<String>?
+        get() = getList("cn_array")
+        set(value) {
+            if (value != null) {
+                put("cn_array",value)
+            }
+            else
+            {
+                put("cn_array", MutableList(0) {
+
+                })
+            }
+        }
+
+    var type: String?
+        get() = getString("type").toString()
+        set(value) {
+            if (value != null) {
+                put("type",value)
+            }
+            else
+            {
+                put("type","")
+            }
+        }
 
 }
