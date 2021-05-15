@@ -1,13 +1,10 @@
 package com.srijan.travelapp.extension
 
 import android.content.Context
-import com.parse.LogInCallback
-import com.parse.ParseException
-import com.parse.ParseFile
-import com.parse.ParseUser
+import com.parse.*
 import com.srijan.travelapp.utils.PreferenceUtil
 
-
+//SplashActivity
 fun ParseUser.checkCurrentUser(context: Context, onComplete: (Boolean) -> Unit)
 {
     if (ParseUser.getCurrentUser() == null)
@@ -38,62 +35,76 @@ fun ParseUser.checkCurrentUser(context: Context, onComplete: (Boolean) -> Unit)
     }
 }
 
+//LoginActivity
 fun ParseUser.loginUser(context: Context, email: String, pwd: String, onComplete: (user: ParseUser?, exception: Exception?) -> Unit)
 {
-    ParseUser.logInInBackground(email, pwd, object : LogInCallback {
-        override fun done(user: ParseUser?, e: ParseException?) {
-            if (e == null && user != null) {
-                PreferenceUtil.putData(context, "email", email)
-                PreferenceUtil.putData(context, "password", pwd)
+    if (email.isEmpty() || pwd.isEmpty())
+    {
+        onComplete(null, Exception("Please fill the required values!"))
+    }
+    else
+    {
+        ParseUser.logInInBackground(email, pwd, object : LogInCallback {
+            override fun done(user: ParseUser?, e: ParseException?) {
+                if (e == null && user != null) {
+                    PreferenceUtil.putData(context, "email", email)
+                    PreferenceUtil.putData(context, "password", pwd)
+                }
+                onComplete(user, e)
             }
-            onComplete(user, e)
-        }
 
-    })
+        })
+    }
 }
 
-
+//CreateUserActivity
 fun ParseUser.createUser(context: Context, email: String, pwd: String, name: String, onComplete: (user: ParseUser?, exception: Exception?) -> Unit)
 {
 // other fields can be set just like with ParseObject
 //user.put("phone", "650-253-0000");
 
     try {
-        val user = ParseUser()
-        with(user)
+        if (email.isEmpty() || pwd.isEmpty() || name.isEmpty())
         {
-            username = email
-            setEmail(email)
-            setPassword(pwd)
-            put("name",name)
+            onComplete(null, Exception("Please fill the required values!"))
         }
-        user.signUpInBackground { exception ->
-            if (exception == null) {
+        else
+        {
+            val user = ParseUser()
+            with(user)
+            {
+                username = email
+                setEmail(email)
+                setPassword(pwd)
+                put("name",name)
+            }
+            user.signUpInBackground { exception ->
+                if (exception == null) {
 
-                if (ParseUser.getCurrentUser() == null)
-                {
-                    ParseUser.logInInBackground(email, pwd, object : LogInCallback {
-                        override fun done(user: ParseUser?, e: ParseException?) {
-                            if (e == null && user != null) {
-                                PreferenceUtil.putData(context, "email", email)
-                                PreferenceUtil.putData(context, "password", pwd)
+                    if (ParseUser.getCurrentUser() == null)
+                    {
+                        ParseUser.logInInBackground(email, pwd, object : LogInCallback {
+                            override fun done(user: ParseUser?, e: ParseException?) {
+                                if (e == null && user != null) {
+                                    PreferenceUtil.putData(context, "email", email)
+                                    PreferenceUtil.putData(context, "password", pwd)
+                                }
+                                onComplete(ParseUser.getCurrentUser(), e)
                             }
-                            onComplete(ParseUser.getCurrentUser(), e)
-                        }
 
-                    })
-                }
-                else
-                {
-                    PreferenceUtil.putData(context, "email", email)
-                    PreferenceUtil.putData(context, "password", pwd)
-                    onComplete(ParseUser.getCurrentUser(), exception)
-                }
-            } else {
+                        })
+                    }
+                    else
+                    {
+                        PreferenceUtil.putData(context, "email", email)
+                        PreferenceUtil.putData(context, "password", pwd)
+                        onComplete(ParseUser.getCurrentUser(), exception)
+                    }
+                } else {
                     onComplete(null, exception)
+                }
             }
         }
-
     }
     catch (e: Exception)
     {
@@ -101,7 +112,7 @@ fun ParseUser.createUser(context: Context, email: String, pwd: String, name: Str
     }
 }
 
-
+//LoginActivity
 fun ParseUser.forgotPassword(context: Context, email: String, onComplete: (Boolean) -> Unit)
 {
     ParseUser.requestPasswordResetInBackground(email) { e ->
@@ -115,6 +126,8 @@ fun ParseUser.forgotPassword(context: Context, email: String, onComplete: (Boole
     }
 }
 
+//CreateUserActivity -> UploadProfileActivity
+//ProfileFragment
 fun ParseUser.uploadProfile(file: ParseFile,onComplete: (Boolean) -> Unit)
 {
     var user= ParseUser.getCurrentUser()
@@ -131,3 +144,57 @@ fun ParseUser.uploadProfile(file: ParseFile,onComplete: (Boolean) -> Unit)
 
     }
 }
+
+//ProfileFragment
+fun ParseUser.logOut(context: Context,onComplete: (Boolean) -> Unit)
+{
+    PreferenceUtil.putData(context, "email", null)
+    PreferenceUtil.putData(context, "password", null)
+    ParseUser.logOutInBackground { e ->
+        if (e == null) {
+            onComplete(true)
+        } else {
+            onComplete(false)
+        }
+    }
+}
+
+//ProfileFragment
+fun ParseUser.getFollowers(onComplete: (List<ParseUser>) -> Unit) {
+    var user = ParseUser.getCurrentUser()
+    var relation: ParseRelation<ParseUser> = user.getRelation("followers")
+    relation.query.findInBackground { objects, e ->
+        when {
+            objects != null -> {
+                onComplete(objects)
+            }
+            e != null -> {
+                onComplete(emptyList())
+            }
+        }
+    }
+}
+
+
+//HomeFragment
+//ProfileFragment
+fun ParseUser.getFollowing(onComplete: (List<ParseUser>) -> Unit) {
+    var user = ParseUser.getCurrentUser()
+    var relation: ParseRelation<ParseUser> = user.getRelation("following")
+    relation.query.findInBackground { objects, e ->
+        when {
+            objects != null -> {
+                onComplete(objects)
+            }
+            e != null -> {
+                onComplete(emptyList())
+            }
+        }
+    }
+}
+
+
+
+
+
+

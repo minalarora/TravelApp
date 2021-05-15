@@ -8,7 +8,7 @@ class PreferenceUtil
     companion object
     {
         @JvmStatic
-        fun putData(context: Context, key: String, value: String)
+        fun putData(context: Context, key: String, value: String?)
         {
             PreferenceManager.getDefaultSharedPreferences(context) ?.let {
                 with(it.edit()){
