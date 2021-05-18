@@ -167,6 +167,18 @@ class Post : ParseObject(){
             }
         }
 
+    var distance: Int?
+        get() = getInt("distance")
+        set(value) {
+            if (value != null) {
+                put("distance",value)
+            }
+            else
+            {
+                put("distance",0)
+            }
+        }
+
     var coordinateArray: MutableList<String>?
         get() = getList("cn_array")
         set(value) {

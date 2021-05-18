@@ -1,11 +1,12 @@
 package com.srijan.travelapp.extension
 
 import com.parse.ParseGeoPoint
-import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.srijan.travelapp.model.OnlyEvent
+import com.srijan.travelapp.model.OnlyPost
+import com.srijan.travelapp.model.OnlyTrip
 import com.srijan.travelapp.model.Post
-import java.util.*
 
 
 fun Post.getFollowingPost(list: List<ParseUser>, page: Int, onComplete: (List<Post>, Exception?) -> Unit)
@@ -117,6 +118,34 @@ fun Post.addLike(post: Post, onComplete: (Boolean, Exception?) -> Unit)
             onComplete(false , e)
         }
     }
+}
+
+fun Post.createPost(obj: Any, onComplete: (Post?, Exception?) -> Unit)
+{
+    if (ParseUser.getCurrentUser()!=null) {
+
+                var p: Post? = null
+                when(obj)
+                {
+                    is OnlyPost -> p = OnlyPost.createParseObject(obj)
+                    is OnlyEvent -> p = OnlyEvent.createParseObject(obj)
+                    is OnlyTrip -> p = OnlyTrip.createParseObject(obj)
+                    else -> p = null
+                }
+                p?.let {
+                    saveInBackground { e ->
+                        if (e == null) {
+                            onComplete(p, null)
+                        } else {
+                            onComplete(null, e)
+                        }
+                    }
+                } ?: onComplete(null, Exception("Unable to create post!"))
+            }
+            else
+            {
+                onComplete(null, Exception("User not found!"))
+            }
 }
 
 
