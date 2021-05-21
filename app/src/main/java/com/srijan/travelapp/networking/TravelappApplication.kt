@@ -34,6 +34,8 @@ class TravelappApplication: Application() {
         ParseObject.registerSubclass(Post::class.java)
         ParseObject.registerSubclass(Comment::class.java)
         ParseObject.registerSubclass(Media::class.java)
+        ParseObject.registerSubclass(Chat::class.java)
+        ParseObject.registerSubclass(Message::class.java)
        // ParseObject.registerSubclass(Demo_One::class.java)
         // set applicationId, and server server based on the values in the back4app settings.
         // any network interceptors must be added with the Configuration Builder given this syntax

@@ -212,6 +212,12 @@ ParseQuery query = relation.getQuery();
 
 -------------------------------------------------------------------------------------------------
 
+To enable caching queries you need to change your query.cachePolicy. For Android you can write:
+
+query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+
+-------------------------------------------------------------------------------------------------------
+
 //https://docs.mapbox.com/android/maps/examples/create-a-line-layer/
 
 //https://docs.mapbox.com/android/maps/examples/draw-a-geojson-line/
