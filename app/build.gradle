@@ -46,8 +46,8 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-    buildFeatures {
-        viewBinding true
+    dataBinding {
+        android.buildFeatures.dataBinding=true
     }
 }
 
@@ -90,7 +90,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'android.arch.lifecycle:extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
 
     //preference
