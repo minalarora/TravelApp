@@ -8,10 +8,81 @@
             name="viewModel"
             type="com.srijan.travelapp.viewmodels.AddProfileViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiant_bg"
     tools:context=".ui.AddProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Hey, User"
+        android:alpha="0.8"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/dark_skin"
+        android:textSize="20sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
+        android:text="@string/add_a_profile_picture"
+        android:alpha="0.8"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/dark_skin"
+        android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/put_your_best_face_forward"
+            android:alpha="0.5"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <com.aghajari.waveanimation.AXWaveView
+        android:id="@+id/wave"
+        android:layout_centerInParent="true"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        app:shader_color_1="@color/skin"
+        app:shader_color_2="@color/dark_skin"
+        app:circle="true"
+        app:amplitude="-1"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/camera"
+        app:civ_border_width="0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:id="@+id/skip"
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/skip"
+        android:textColor="@color/dark_skin"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        app:drawableRightCompat="@drawable/ic_next_arrow"
+        app:drawableTint="@color/dark_skin" />
+
+</RelativeLayout>
 </layout>
