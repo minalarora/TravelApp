@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.TravelApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/skin</item>
-        <item name="colorPrimaryVariant">@color/skin</item>
+        <item name="colorPrimary">@color/dark_skin</item>
+        <item name="colorPrimaryVariant">@color/dark_skin</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/skin</item>
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
@@ -24,4 +25,7 @@
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/roboto_regular</item>
     </style>
+
+
+
 </resources>
