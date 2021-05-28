@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
 
-        setCurrentFragment(HomeFragment(),"home")
+        if (savedInstanceState == null) setCurrentFragment(HomeFragment(),"home")
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId)

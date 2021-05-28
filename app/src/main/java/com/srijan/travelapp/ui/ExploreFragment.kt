@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.srijan.travelapp.R
+import com.srijan.travelapp.adapters.ExploreFragmentPagerAdapter
+import com.srijan.travelapp.adapters.HomeFragmentPagerAdapter
 import com.srijan.travelapp.databinding.FragmentExploreBinding
 import com.srijan.travelapp.databinding.FragmentHomeBinding
 import com.srijan.travelapp.viewmodels.ExploreViewModel
@@ -30,6 +33,9 @@ class ExploreFragment : Fragment() {
             viewModel = ViewModelProvider(this@ExploreFragment).get(ExploreViewModel::class.java)
                 .apply {  }
         }
+        binding.include.findViewById<TextView>(R.id.title).apply { text = "EXPLORE" }
+        binding.viewpager.adapter = ExploreFragmentPagerAdapter(childFragmentManager)
+        binding.slidingTabs.setupWithViewPager(binding.viewpager)
         return binding.root
     }
 
