@@ -1,8 +1,11 @@
 package com.srijan.travelapp.networking
 
 import android.app.Application
+import com.mapbox.search.MapboxSearchSdk
+import com.mapbox.search.location.DefaultLocationProvider
 import com.parse.Parse
 import com.parse.ParseObject
+import com.srijan.travelapp.R
 import com.srijan.travelapp.model.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,6 +50,13 @@ class TravelappApplication: Application() {
                 .clientBuilder(builder)
                 .build()
         );
+
+
+        MapboxSearchSdk.initialize(
+            this,
+            getString(R.string.mapbox),
+            DefaultLocationProvider(this)
+        )
 
 
     }

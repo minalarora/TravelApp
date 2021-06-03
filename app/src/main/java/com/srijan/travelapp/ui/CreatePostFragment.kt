@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.srijan.travelapp.R
 import com.srijan.travelapp.databinding.FragmentCreatePostBinding
 import com.srijan.travelapp.viewmodels.CreatePostViewModel
@@ -31,9 +32,18 @@ class CreatePostFragment : Fragment() {
                 lifecycleOwner = this@CreatePostFragment.viewLifecycleOwner
                 viewModel = ViewModelProvider(requireActivity()).get(CreatePostViewModel::class.java)
                     .apply {
-                        Log.d("minal",imageList.value.toString())
+
+
                     }
             }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        Glide.with(requireContext())
+//            .load(path)
+//            .into(binding.demo)
+
     }
 }

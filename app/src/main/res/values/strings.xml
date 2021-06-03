@@ -20,6 +20,42 @@
     <string name="put_your_best_face_forward">Put your best face forward</string>
     <string name="skip">SKIP</string>
     <string name="wallpaper">wallpaper</string>
+    <string name="mapbox">pk.eyJ1IjoidHJhdmVsYXBwc3JpamFuIiwiYSI6ImNrbm82MjZ5bTE0bTgydm1vd2RkZHU4djcifQ.4wYll8m4znIOOYkvIMIaWw</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="publish">PUBLISH</string>
+    <string name="add_a_title">Add a title</string>
+    <string name="add_location">Add Location</string>
+    <string name="share_your_interest">Share your interest</string>
+    <string name="cancel">CANCEL</string>
+    <string name="submit">SUBMIT</string>
+    <string name="choose_your_current_location">Choose your current location</string>
+    <string name="done">DONE</string>
+    <string name="add_a_description">Add a description</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="entry_amount">Entry Amount</string>
+    <string name="how_much">How Much?</string>
+    <string name="when">When you started?</string>
+    <string name="duration">Distance</string>
+    <string name="time">Time</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
+    <string name="next">NEXT</string>
+    <string name="follow">Follow</string>
+    <string name="title">Title</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+    <string name="share">Share</string>
+    <string name="join">JOIN</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="speed">Speed</string>
+    <string-array name="category_array">
+
+        <item>TAG1</item>
+        <item>TAG2</item>
+        <item>TAG3</item>
+
+    </string-array>
 </resources>
